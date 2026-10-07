@@ -224,7 +224,6 @@ export const site = {
     { img: 'kegiatan-terapi-1', alt: 'Terapis mendampingi anak berlatih mengapung di kolam yang asri' },
     { img: 'kegiatan-terapi-2', alt: 'Terapis berinteraksi dengan anak di tepi kolam' },
     { img: 'foto-k1-top', alt: 'Terapis mendampingi anak berlatih meluncur dengan pool noodle' },
-    { img: 'suasana-kolam-2', alt: 'Suasana kolam yang asri dan teduh' },
   ],
 
   faq: [

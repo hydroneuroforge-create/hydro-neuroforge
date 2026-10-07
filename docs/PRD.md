@@ -404,3 +404,6 @@ Semuanya bisa ditambahkan di versi berikutnya.
 - Kutipan empati memakai tanda kutip, tanpa tanda pisah.
 - Isi paket: "Termasuk tiket anak, dan gratis 1 tiket pengantar" menggantikan "Untuk usia 2–17 tahun".
 - Galeri: foto tampil utuh (masonry, tanpa zoom/potong) + bisa diperbesar; foto beresolusi rendah dari poster diganti foto asli.
+
+### Revisi 2
+- Galeri: foto suasana kolam cukup 1. Susunan masonry dibuat dengan flexbox (bukan CSS `columns`) karena di Safari iPhone ada foto yang tidak tampil.

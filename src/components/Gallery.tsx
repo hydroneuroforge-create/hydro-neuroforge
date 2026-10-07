@@ -1,13 +1,29 @@
 import { useEffect, useRef, useState } from 'react'
 import { Expand, X } from 'lucide-react'
 import { site } from '../content/site'
+import { images, type ImageName } from '../content/images.generated'
 import { Picture } from './Picture'
-import type { ImageName } from '../content/images.generated'
+
+type Item = (typeof site.gallery)[number] & { index: number }
 
 /**
- * Galeri foto: ditampilkan UTUH sesuai rasio aslinya (tidak dipotong/di-zoom)
- * dalam susunan masonry. Ketuk foto untuk memperbesar.
+ * Bagi foto ke 2 kolom (masonry) berdasarkan rasio asli, selalu ke kolom yang paling pendek.
+ * Sengaja TIDAK memakai CSS `columns`: di Safari iPhone, gambar lazy-load di dalam
+ * multi-column kadang tidak pernah tampil.
  */
+function toColumns(count: number): Item[][] {
+  const cols: Item[][] = Array.from({ length: count }, () => [])
+  const heights = new Array(count).fill(0)
+  site.gallery.forEach((g, index) => {
+    const m = images[g.img as ImageName]
+    const c = heights.indexOf(Math.min(...heights))
+    cols[c].push({ ...g, index })
+    heights[c] += m.h / m.w
+  })
+  return cols
+}
+
+/** Galeri foto: ditampilkan UTUH sesuai rasio aslinya (tidak dipotong/di-zoom). Ketuk untuk memperbesar. */
 export function Gallery() {
   const [open, setOpen] = useState<number | null>(null)
   const dialog = useRef<HTMLDialogElement>(null)
@@ -17,24 +33,39 @@ export function Gallery() {
   }, [open])
 
   const item = open !== null ? site.gallery[open] : null
+  const columns = toColumns(2)
   return (
     <>
-      <div className="mx-auto max-w-6xl columns-2 gap-3 px-5 md:columns-3 md:gap-5">
-        {site.gallery.map((g, i) => (
-          <button
-            key={g.img}
-            type="button"
-            onClick={() => setOpen(i)}
-            className="group relative mb-3 block w-full break-inside-avoid overflow-hidden rounded-3xl bg-deep/40 shadow-[0_20px_50px_-25px_rgb(0_0_0/0.7)] ring-1 ring-white/10 md:mb-5"
-            aria-label={`Perbesar foto: ${g.alt}`}
-            data-reveal="zoom"
-            data-delay={String((i % 3) * 0.08)}
-          >
-            <Picture name={g.img as ImageName} alt={g.alt} sizes="(min-width: 768px) 380px, 46vw" imgClassName="block h-auto w-full transition duration-500 group-hover:scale-[1.03]" />
-            <span className="absolute right-2 bottom-2 flex size-8 items-center justify-center rounded-full bg-navy/60 text-white backdrop-blur-sm">
-              <Expand className="size-4" aria-hidden="true" />
-            </span>
-          </button>
+      <div className="mx-auto flex max-w-4xl items-start gap-3 px-5 md:gap-5">
+        {columns.map((col, ci) => (
+          <div key={ci} className="flex min-w-0 flex-1 flex-col gap-3 md:gap-5">
+            {col.map((g) => {
+              const m = images[g.img as ImageName]
+              return (
+                <button
+                  key={g.img}
+                  type="button"
+                  onClick={() => setOpen(g.index)}
+                  className="group relative block w-full overflow-hidden rounded-3xl bg-deep/40 shadow-[0_20px_50px_-25px_rgb(0_0_0/0.7)] ring-1 ring-white/10"
+                  style={{ aspectRatio: `${m.w} / ${m.h}` }}
+                  aria-label={`Perbesar foto: ${g.alt}`}
+                  data-reveal="zoom"
+                  data-delay={String(g.index * 0.06)}
+                >
+                  <Picture
+                    name={g.img as ImageName}
+                    alt={g.alt}
+                    sizes="(min-width: 768px) 440px, 46vw"
+                    className="block size-full"
+                    imgClassName="block size-full object-cover transition duration-500 md:group-hover:scale-[1.03]"
+                  />
+                  <span className="absolute right-2 bottom-2 flex size-8 items-center justify-center rounded-full bg-navy/60 text-white backdrop-blur-sm">
+                    <Expand className="size-4" aria-hidden="true" />
+                  </span>
+                </button>
+              )
+            })}
+          </div>
         ))}
       </div>
 

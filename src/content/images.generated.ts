@@ -67,15 +67,6 @@ export const images = {
       1179
     ]
   },
-  "suasana-kolam-2": {
-    "w": 1179,
-    "h": 988,
-    "widths": [
-      480,
-      800,
-      1179
-    ]
-  },
   "testimoni-1": {
     "w": 1587,
     "h": 2245,
