@@ -1,0 +1,143 @@
+@import 'tailwindcss';
+@import '@fontsource-variable/plus-jakarta-sans/wght.css';
+@import '@fontsource-variable/fredoka/wght.css';
+
+@theme {
+  --color-navy: #0f2028;
+  --color-navy-2: #14303b;
+  --color-deep: #1d5a6b;
+  --color-steel: #5e8592;
+  --color-slate: #486875;
+  --color-mist: #9cb4ba;
+  --color-foam: #f5f8f9;
+  --color-aqua: #2ec4d6;
+  --color-aqua-soft: #a9ecf3;
+  --color-sun: #ffd447;
+  --color-wa: #25d366;
+  --color-wa-dark: #128c7e;
+
+  --font-sans: 'Plus Jakarta Sans Variable', ui-sans-serif, system-ui, sans-serif;
+  --font-display: 'Fredoka Variable', 'Plus Jakarta Sans Variable', ui-rounded, system-ui, sans-serif;
+
+  --animate-float: float 6s ease-in-out infinite;
+  --animate-pulse-ring: pulse-ring 2.4s cubic-bezier(0.2, 0.6, 0.3, 1) infinite;
+  --animate-shimmer: shimmer 3.2s linear infinite;
+}
+
+@keyframes float {
+  0%, 100% { transform: translateY(0); }
+  50% { transform: translateY(-10px); }
+}
+@keyframes pulse-ring {
+  0% { transform: scale(0.9); opacity: 0.7; }
+  100% { transform: scale(1.7); opacity: 0; }
+}
+@keyframes shimmer {
+  from { background-position: -200% 0; }
+  to { background-position: 200% 0; }
+}
+@keyframes rays {
+  0%, 100% { opacity: 0.55; transform: translateX(0) skewX(-12deg); }
+  50% { opacity: 0.85; transform: translateX(4%) skewX(-8deg); }
+}
+@keyframes bubble {
+  from { opacity: 0; transform: translateY(8px) scale(0.96); }
+  to { opacity: 1; transform: none; }
+}
+@keyframes fade-up {
+  from { opacity: 0; transform: translateY(18px); }
+  to { opacity: 1; transform: none; }
+}
+@keyframes typing {
+  0%, 60%, 100% { transform: translateY(0); opacity: 0.4; }
+  30% { transform: translateY(-3px); opacity: 1; }
+}
+
+@layer base {
+  html {
+    -webkit-text-size-adjust: 100%;
+    -webkit-tap-highlight-color: transparent;
+    scroll-padding-top: 72px;
+  }
+  body {
+    @apply bg-navy font-sans text-white antialiased;
+    text-rendering: optimizeLegibility;
+  }
+  ::selection { background: var(--color-aqua); color: var(--color-navy); }
+  :focus-visible { outline: 3px solid var(--color-sun); outline-offset: 3px; border-radius: 6px; }
+  h1, h2, h3 { @apply font-display; letter-spacing: -0.01em; text-wrap: balance; }
+  p { text-wrap: pretty; }
+}
+
+/* Kartu "kaca" di bawah air. Blur hanya di layar besar (hemat GPU HP). */
+@utility glass {
+  background: linear-gradient(160deg, rgb(20 48 59 / 0.78), rgb(15 32 40 / 0.62));
+  border: 1px solid rgb(169 236 243 / 0.16);
+  box-shadow: 0 20px 50px -20px rgb(0 0 0 / 0.45), inset 0 1px 0 rgb(255 255 255 / 0.06);
+  @media (min-width: 768px) {
+    backdrop-filter: blur(10px) saturate(1.2);
+    -webkit-backdrop-filter: blur(10px) saturate(1.2);
+    background: linear-gradient(160deg, rgb(20 48 59 / 0.6), rgb(15 32 40 / 0.45));
+  }
+}
+@utility eyebrow {
+  display: inline-flex; align-items: center; gap: 0.5rem; border-radius: 9999px;
+  padding: 0.25rem 0.75rem; font-size: 0.75rem; line-height: 1rem; font-weight: 700;
+  letter-spacing: 0.14em; text-transform: uppercase;
+}
+@utility btn {
+  display: inline-flex; min-height: 3rem; align-items: center; justify-content: center; gap: 0.5rem;
+  border-radius: 9999px; padding: 0.75rem 1.5rem; font-size: 1rem; font-weight: 700;
+  transition: transform 0.2s, filter 0.2s, background-color 0.2s; user-select: none;
+  &:active { transform: scale(0.97); }
+}
+@utility btn-wa {
+  @apply btn;
+  background: var(--color-wa); color: var(--color-navy);
+  box-shadow: 0 10px 30px -8px rgb(37 211 102 / 0.65);
+  &:hover { filter: brightness(1.05); }
+}
+@utility btn-ghost {
+  @apply btn;
+  border: 1px solid rgb(255 255 255 / 0.3); background: rgb(255 255 255 / 0.05); color: #fff;
+  &:hover { background: rgb(255 255 255 / 0.1); }
+}
+@utility text-gradient {
+  background: linear-gradient(100deg, #fff 10%, var(--color-aqua-soft) 45%, var(--color-sun) 90%);
+  -webkit-background-clip: text; background-clip: text; color: transparent;
+}
+@utility sensor {
+  display: inline-block; vertical-align: -0.15em; height: 1.05em; border-radius: 4px;
+  background: currentColor; opacity: 0.55; filter: blur(3.5px);
+}
+
+/* Latar laut statis (perangkat ringan / Mode Tenang / sebelum 3D siap) */
+.ocean-fallback {
+  position: fixed; inset: 0; z-index: 0; pointer-events: none;
+  background:
+    radial-gradient(120% 60% at 50% 0%, rgb(169 236 243 / calc(0.55 * (1 - var(--depth, 0)))), transparent 60%),
+    linear-gradient(180deg,
+      color-mix(in oklab, #2ec4d6 calc(100% * (1 - var(--depth, 0))), #1d5a6b) 0%,
+      color-mix(in oklab, #1d5a6b calc(100% * (1 - var(--depth, 0))), #0f2028) 55%,
+      #0f2028 100%);
+}
+.ocean-fallback::before {
+  content: ''; position: absolute; inset: -10% -20% 30%;
+  background: repeating-linear-gradient(100deg, transparent 0 6%, rgb(255 255 255 / 0.07) 7% 9%, transparent 10% 16%);
+  mask-image: linear-gradient(180deg, #000, transparent);
+  animation: rays 9s ease-in-out infinite;
+}
+
+/* Mode Tenang: matikan semua animasi & transisi */
+html.calm *, html.calm *::before, html.calm *::after {
+  animation-duration: 0.001ms !important; animation-iteration-count: 1 !important;
+  transition-duration: 0.001ms !important; scroll-behavior: auto !important;
+}
+
+/* Elemen yang dianimasikan masuk; tanpa JS tetap terlihat */
+.js [data-reveal] { opacity: 0; transform: translateY(28px); }
+html.calm [data-reveal] { opacity: 1 !important; transform: none !important; }
+
+.no-scrollbar { scrollbar-width: none; }
+.no-scrollbar::-webkit-scrollbar { display: none; }
+.pb-safe { padding-bottom: max(1rem, env(safe-area-inset-bottom)); }

@@ -1,62 +1,91 @@
-# Hydro Neuroforge Center — Website 3D
+# Hydro Neuroforge Center — Website
 
-Website landing page 3D interaktif untuk **Hydro Neuroforge Center**, layanan hidroterapi & fun swimming untuk anak berkebutuhan khusus di Sportclub Danau Bogor Raya.
+Website 3D untuk **Hydro Neuroforge Center** (Hydrotherapy for Special Needs, Sportclub Danau Bogor Raya).
+Rencana produk lengkap ada di [`docs/PRD.md`](docs/PRD.md).
 
-> _Menempa Potensi, Merawat Harapan._
+| Halaman | URL | Fungsi |
+|---|---|---|
+| Beranda | `/` | Branding. Pengalaman 3D "menyelam" mengikuti scroll |
+| Landing page iklan | `/hydrotherapy` | Tujuan iklan IG/FB/Google. Ringan, tanpa menu, fokus chat WhatsApp |
+| Kebijakan privasi | `/kebijakan-privasi` | Wajib karena formulir memuat data diagnosa anak |
+| 404 | (otomatis) | Halaman tidak ditemukan |
 
-## ✨ Fitur
+---
 
-- 🌊 **Hero 3D** — scene air beriak + kolam terapi 3D (Three.js) dengan gelembung mengambang
-- 💙 Nuansa ceria & menenangkan, dominasi biru awan + putih
-- 📱 Responsif (mobile-first), scene 3D di-_lazy-load_ agar cepat di HP
-- 💬 Tombol **WhatsApp** mengambang + form kontak yang kirim langsung ke WhatsApp
-- 🖼️ Galeri terhubung ke Instagram [@hydro.neuroforge](https://www.instagram.com/hydro.neuroforge)
-- ❓ FAQ accordion
-- 📍 Embed Google Maps lokasi
-- 🌐 Bahasa Indonesia dominan dengan sentuhan Inggris profesional
+## ✏️ Cara mengubah konten (untuk manusia & AI agent)
 
-## 🛠️ Teknologi
+**Hampir semua perubahan cukup di satu file: [`src/content/site.ts`](src/content/site.ts).**
 
-React 19 · TypeScript · Vite · Three.js (@react-three/fiber + drei) · Tailwind CSS v4 · Framer Motion · lucide-react
+| Mau mengubah… | Ubah di `site.ts` bagian |
+|---|---|
+| Nomor WhatsApp, Instagram | `contact` |
+| Jam operasional | `hours` |
+| Harga & isi paket | `program` |
+| 4 manfaat | `benefits` |
+| Alur 3 langkah | `steps` |
+| Daftar kondisi anak | `conditions` |
+| Testimoni chat | `testimonials.chats` |
+| FAQ | `faq` |
+| Pilihan diagnosa di formulir | `form.diagnoses` |
+| Pesan otomatis tombol WA | `waDefaultMessage` |
+| Google Analytics / Meta Pixel | `analytics.ga4Id`, `analytics.metaPixelId` |
+
+Aturan penting:
+- **Jangan menulis nama asli anak atau terapis** di repo ini. Untuk bagian yang harus diburamkan di testimoni, tulis `[[sensor]]`.
+- Teks testimoni disalin **apa adanya** dari screenshot asli. Jangan mengarang testimoni.
+- Klaim Harvard ditulis "Berlandaskan riset Center on the Developing Child, Harvard University". Jangan diubah menjadi "bekerja sama/disertifikasi".
+
+Teks halaman lain (judul bagian, hero) ada di `src/pages/HomePage.tsx` dan `src/pages/LandingPage.tsx`.
+
+### Mengganti / menambah foto
+1. Taruh foto (JPG/PNG) di `assets-src/`. **Wajah anak harus sudah diburamkan.**
+2. Jalankan `npm run images`. Hasilnya: versi AVIF/WebP di `public/img/` dan daftar ukuran di `src/content/images.generated.ts`.
+3. Pakai nama filenya (tanpa ekstensi) di `site.ts`, misalnya di bagian `gallery`.
+
+### Mengatur gerakan kamera 3D di beranda
+Setiap `<section>` di `HomePage.tsx` punya atribut berikut:
+- `data-depth`: ketinggian kamera (positif = di atas air, negatif = di bawah air)
+- `data-pitch`: sudut pandang dalam derajat (negatif = menunduk, positif = menengadah)
+- `data-brain`: kemunculan otak neuron (0–1)
+- `data-assemble`: seberapa utuh bentuk otaknya (0 = tersebar, 1 = utuh)
+
+---
 
 ## 🚀 Menjalankan
 
 ```bash
-npm install        # install dependencies (sekali saja)
-npm run dev        # jalankan di mode pengembangan (buka http://localhost:5173)
-npm run build      # build untuk produksi (hasil di folder dist/)
-npm run preview    # preview hasil build produksi
+npm install
+npm run dev       # http://localhost:5173
+npm run build     # hasil di dist/ (sudah di-prerender per halaman)
+npm run preview   # mencoba hasil build
+npm run lint
 ```
 
-## ⚙️ Konfigurasi (WAJIB diisi sebelum live)
+Untuk pengujian, tambahkan parameter `?tier=high`, `?tier=mid`, atau `?tier=low` agar level grafis 3D bisa dipaksa.
 
-Semua info kontak terpusat di **`src/config.ts`** — cukup edit satu file ini:
+## ☁️ Deploy ke Vercel
 
-| Variabel | Keterangan |
-|----------|------------|
-| `WHATSAPP_NUMBER` | Nomor WhatsApp resmi, format internasional tanpa `+` (contoh `6281234567890`) |
-| `INSTAGRAM_URL` / `INSTAGRAM_HANDLE` | Sudah terisi `@hydro.neuroforge` |
-| `MAPS_EMBED_URL` / `MAPS_LINK` | Embed Google Maps — ganti dengan embed resmi lokasi bila sudah ada |
-| `LOCATION_FULL` | Alamat lengkap |
+1. Buka vercel.com → **Add New… → Project** → impor repo `hydro-neuroforge`.
+2. Pengaturan terbaca otomatis dari `vercel.json` (build `npm run build`, output `dist`). Klik **Deploy**.
+3. Domain: **Settings → Domains** → tambahkan `hydroneuroforge.io`, lalu ikuti instruksi DNS dari Vercel.
 
-## 📝 Yang perlu dilengkapi nanti
+## 📣 Link untuk iklan
 
-- [ ] Nomor WhatsApp asli di `src/config.ts`
-- [ ] Foto fasilitas asli untuk galeri (saat ini placeholder ilustratif)
-- [ ] Testimoni asli orang tua (`src/components/Testimonials.tsx`)
-- [ ] Embed Google Maps final
-
-## 📂 Struktur
+Gunakan landing page dengan parameter UTM, misalnya:
 
 ```
-src/
-├── config.ts              # ← pusat konfigurasi (WA, IG, Maps, brand)
-├── App.tsx                # susunan semua section
-├── three/
-│   └── WaterScene.tsx     # scene 3D: air, kolam terapi, gelembung
-└── components/
-    ├── Navbar.tsx  Hero.tsx  About.tsx  Services.tsx  Benefits.tsx
-    ├── Gallery.tsx  Testimonials.tsx  FAQ.tsx  Location.tsx
-    ├── Contact.tsx  Footer.tsx  WhatsAppFloat.tsx  Section.tsx
-    └── icons/InstagramIcon.tsx
+https://hydroneuroforge.io/hydrotherapy?utm_source=instagram&utm_campaign=oktober
 ```
+
+Sumber iklan ikut tercatat di akhir pesan WhatsApp sebagai `(ref: instagram-oktober)`, sehingga Anda tahu iklan mana yang menghasilkan chat.
+
+## 🧱 Teknologi
+
+Vite + React 19 + TypeScript · Three.js via React Three Fiber (shader air, caustics, god rays, otak neuron prosedural) · GSAP ScrollTrigger · Tailwind CSS v4 · prerender statis (`scripts/prerender.mjs`).
+
+Fitur performa:
+- Scene 3D dimuat setelah halaman tampil.
+- Kualitas grafis menyesuaikan perangkat dan resolusi turun otomatis bila FPS drop.
+- Latar statis untuk perangkat lemah.
+- **Mode Tenang** (animasi mati), aktif otomatis bila HP disetel "kurangi gerakan".
+- Landing page memakai shader WebGL murni sekitar 2 KB, tanpa Three.js.

@@ -1,0 +1,9 @@
+{
+  "name": "Hydro Neuroforge Center",
+  "short_name": "Hydro Neuroforge",
+  "icons": [{ "src": "/icon-512.png", "sizes": "512x512", "type": "image/png" }],
+  "theme_color": "#0F2028",
+  "background_color": "#0F2028",
+  "display": "browser",
+  "lang": "id"
+}
