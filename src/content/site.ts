@@ -19,6 +19,10 @@ export const site = {
   shortName: 'Hydro Neuroforge',
   url: 'https://hydroneuroforge.io',
   tagline: 'Hydrotherapy for Special Needs',
+  slogan: 'Magic of water, power of Neuroforge.',
+  /** Deskripsi utama (hero beranda & footer) */
+  description:
+    'Terapi air yang membantu stimulasi sistem saraf pusat otak, meregulasi emosi, dan membantu perkembangan sensorik & motorik anak berkebutuhan khusus di Sport Club Danau Bogor Raya.',
 
   contact: {
     /** format internasional tanpa + dan tanpa spasi */
@@ -74,7 +78,7 @@ export const site = {
       '60 menit per sesi',
       '1 anak : 1 terapis',
       'Materi disusun sesuai hasil observasi',
-      'Untuk usia 2–17 tahun',
+      'Termasuk tiket anak, dan gratis 1 tiket pengantar',
     ],
     note: 'Konsultasi via WhatsApp gratis. Observasi awal dilakukan tatap muka (berbayar) dan sudah termasuk sesi konsultasi langsung dengan tim kami.',
   },
@@ -214,13 +218,13 @@ export const site = {
     posters: ['testimoni-1', 'testimoni-2', 'testimoni-3'],
   },
 
+  /** Foto ditampilkan utuh (tidak dipotong). Wajah anak wajib sudah diburamkan. */
   gallery: [
-    { img: 'foto-k1-top', alt: 'Terapis mendampingi anak berlatih meluncur dengan pool noodle' },
     { img: 'suasana-kolam-1', alt: 'Kolam renang Sportclub Danau Bogor Raya dengan pohon kelapa' },
-    { img: 'foto-k2-bot', alt: 'Anak berlatih mengapung dengan pelampung didampingi terapis' },
-    { img: 'foto-k2-tl', alt: 'Anak berlatih gerakan di kolam dengan dua pool noodle' },
+    { img: 'kegiatan-terapi-1', alt: 'Terapis mendampingi anak berlatih mengapung di kolam yang asri' },
+    { img: 'kegiatan-terapi-2', alt: 'Terapis berinteraksi dengan anak di tepi kolam' },
+    { img: 'foto-k1-top', alt: 'Terapis mendampingi anak berlatih meluncur dengan pool noodle' },
     { img: 'suasana-kolam-2', alt: 'Suasana kolam yang asri dan teduh' },
-    { img: 'foto-k2-mr', alt: 'Terapis memeluk dan menenangkan anak di dalam kolam' },
   ],
 
   faq: [

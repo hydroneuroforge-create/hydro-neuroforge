@@ -76,7 +76,7 @@ export function LandingPage() {
         {/* ============ BUKTI CEPAT ============ */}
         <section className="px-5 py-12">
           <div className="mx-auto max-w-6xl">
-            <Partners tone="light" />
+            <Partners tone="light" only={['aasm', 'harvard']} />
           </div>
         </section>
 
@@ -174,6 +174,11 @@ export function LandingPage() {
         <section className="px-5 py-14">
           <Title eyebrow="FAQ">Masih ragu?</Title>
           <Faq limit={4} tone="light" />
+        </section>
+
+        {/* ============ PARTNER (bawah) ============ */}
+        <section className="px-5 pb-6">
+          <Partners tone="light" only={['yasi']} />
         </section>
 
         {/* ============ LOKASI ============ */}

@@ -22,6 +22,7 @@
   --animate-float: float 6s ease-in-out infinite;
   --animate-pulse-ring: pulse-ring 2.4s cubic-bezier(0.2, 0.6, 0.3, 1) infinite;
   --animate-shimmer: shimmer 3.2s linear infinite;
+  --animate-twinkle: twinkle 2.4s ease-in-out infinite;
 }
 
 @keyframes float {
@@ -35,6 +36,14 @@
 @keyframes shimmer {
   from { background-position: -200% 0; }
   to { background-position: 200% 0; }
+}
+@keyframes twinkle {
+  0%, 100% { transform: scale(1) rotate(0deg); opacity: 1; }
+  50% { transform: scale(1.25) rotate(18deg); opacity: 0.75; }
+}
+@keyframes slogan-sweep {
+  from { background-position: 100% 50%; }
+  to { background-position: -100% 50%; }
 }
 @keyframes rays {
   0%, 100% { opacity: 0.55; transform: translateX(0) skewX(-12deg); }
@@ -105,6 +114,15 @@
 @utility text-gradient {
   background: linear-gradient(100deg, #fff 10%, var(--color-aqua-soft) 45%, var(--color-sun) 90%);
   -webkit-background-clip: text; background-clip: text; color: transparent;
+}
+/* Slogan hero: teks berkilau seperti pantulan cahaya di air (tetap terbaca saat diam) */
+@utility slogan-shimmer {
+  background: linear-gradient(100deg, #ffffff 0%, #ffffff 30%, var(--color-sun) 45%, #ffffff 55%, var(--color-aqua-soft) 70%, #ffffff 100%);
+  background-size: 200% 100%;
+  background-position: 100% 50%;
+  -webkit-background-clip: text; background-clip: text; color: transparent;
+  animation: slogan-sweep 3.6s linear infinite;
+  text-shadow: none;
 }
 @utility sensor {
   display: inline-block; vertical-align: -0.15em; height: 1.05em; border-radius: 4px;

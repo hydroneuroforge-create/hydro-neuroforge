@@ -10,7 +10,7 @@ export function Footer({ showCalm = true }: { showCalm?: boolean }) {
         <div>
           <Logo tone="light" />
           <p className="mt-4 max-w-sm text-sm leading-relaxed text-white/65">
-            {site.tagline}. Hydrotherapy 1-on-1 untuk anak berkebutuhan khusus usia 2–17 tahun di {site.location.name}.
+            {site.description}
           </p>
         </div>
         <div className="text-sm">

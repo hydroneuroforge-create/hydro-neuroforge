@@ -1,4 +1,4 @@
-import { BookOpenCheck, Check, ChevronDown, MessageCircle, ShieldCheck, Sparkles, Users } from 'lucide-react'
+import { BookOpenCheck, Check, ChevronDown, MessageCircle, ShieldCheck, Sparkles } from 'lucide-react'
 import { site } from '../content/site'
 import { useReveal } from '../lib/reveal'
 import { BenefitIcon } from '../components/BenefitIcon'
@@ -8,12 +8,11 @@ import { Footer } from '../components/Footer'
 import { Header } from '../components/Header'
 import { Location } from '../components/Location'
 import { Partners } from '../components/Partners'
-import { Picture } from '../components/Picture'
+import { Gallery } from '../components/Gallery'
 import { Testimonials } from '../components/Testimonials'
 import { WaForm } from '../components/WaForm'
 import { WaIcon, WaLink } from '../components/WaLink'
 import { OceanBackground } from '../three/OceanBackground'
-import type { ImageName } from '../content/images.generated'
 import type { ReactNode } from 'react'
 
 /**
@@ -31,12 +30,6 @@ function SectionTitle({ eyebrow, title, sub, center = true }: { eyebrow: string;
   )
 }
 
-const blobs = [
-  'rounded-[46%_54%_42%_58%/55%_45%_55%_45%]',
-  'rounded-[60%_40%_55%_45%/45%_60%_40%_55%]',
-  'rounded-[40%_60%_60%_40%/60%_40%_60%_40%]',
-]
-
 export function HomePage() {
   useReveal()
   return (
@@ -49,16 +42,17 @@ export function HomePage() {
           <div className="pointer-events-none absolute inset-x-0 bottom-0 h-[60%] bg-gradient-to-t from-navy via-navy/80 to-transparent md:h-[75%]" aria-hidden="true" />
           <div className="relative mx-auto w-full max-w-6xl px-5 pt-24 pb-8 md:pb-28">
             <div className="max-w-2xl">
-              <p className="eyebrow animate-[fade-up_.8s_.1s_both] bg-white/15 text-white backdrop-blur-sm">
-                <Sparkles className="size-3.5 text-sun" aria-hidden="true" /> Terapi air 1-on-1 · Usia 2–17 tahun
+              <p className="inline-flex animate-[fade-up_.8s_.1s_both] items-center gap-2 rounded-full bg-navy/60 px-4 py-2 ring-1 ring-aqua-soft/30 backdrop-blur-sm">
+                <Sparkles className="size-4 shrink-0 animate-twinkle text-sun" aria-hidden="true" />
+                <span className="slogan-shimmer font-display text-[15px] font-semibold tracking-[0.01em] sm:text-[17px]">{site.slogan}</span>
               </p>
               <h1 className="mt-4 animate-[fade-up_.9s_.2s_both] text-[42px] leading-[0.98] font-semibold sm:mt-5 sm:text-7xl">
                 <span className="text-gradient">Hydrotherapy</span>
                 <br />
                 for Special Needs
               </h1>
-              <p className="mt-4 max-w-xl animate-[fade-up_.9s_.35s_both] text-[16px] leading-relaxed text-white/85 sm:mt-5 sm:text-lg">
-                Terapi air 1-on-1 untuk membantu perkembangan otak, emosi, dan motorik anak berkebutuhan khusus di Sportclub Danau Bogor Raya.
+              <p className="mt-4 max-w-xl animate-[fade-up_.9s_.35s_both] text-[15.5px] leading-relaxed text-white/85 sm:mt-5 sm:text-lg">
+                {site.description}
               </p>
               <div className="mt-5 flex animate-[fade-up_.9s_.5s_both] flex-col items-start gap-3 sm:mt-7 sm:flex-row sm:items-center">
                 <WaLink place="hero" className="btn-wa w-full text-[16px] sm:w-auto">
@@ -71,10 +65,9 @@ export function HomePage() {
                   Lihat program & biaya ↓
                 </a>
               </div>
-              <ul className="mt-5 flex animate-[fade-up_.9s_.65s_both] flex-wrap gap-x-4 gap-y-1.5 text-[12px] font-medium text-white/75 sm:mt-7 sm:grid sm:grid-cols-3 sm:gap-4 sm:text-[13px]">
+              <ul className="mt-5 flex animate-[fade-up_.9s_.65s_both] flex-wrap gap-x-4 gap-y-1.5 text-[12px] font-medium text-white/75 sm:mt-7 sm:grid sm:max-w-xl sm:grid-cols-2 sm:gap-6 sm:text-[13px]">
                 <li className="flex items-center gap-2"><BookOpenCheck className="size-4 shrink-0 text-sun" aria-hidden="true" /> Riset Harvard Center on the Developing Child</li>
-                <li className="flex items-center gap-2"><ShieldCheck className="size-4 shrink-0 text-aqua" aria-hidden="true" /> Naungan AASM</li>
-                <li className="flex items-center gap-2"><Users className="size-4 shrink-0 text-wa" aria-hidden="true" /> Partner Yayasan Anak Spesial Indonesia</li>
+                <li className="flex items-center gap-2"><ShieldCheck className="size-4 shrink-0 text-aqua" aria-hidden="true" /> Di bawah naungan Association Aquatic of Sport Medicine</li>
               </ul>
             </div>
           </div>
@@ -91,7 +84,7 @@ export function HomePage() {
               Setiap anak punya caranya sendiri untuk <span className="text-sun">tumbuh</span>.
             </p>
             <p className="mx-auto mt-6 max-w-xl text-[17px] leading-relaxed text-white/80" data-reveal data-delay="0.1">
-              Di dalam air, tubuh terasa ringan, gerak terasa aman, dan setiap sentuhan air menjadi stimulasi. Di sinilah si kecil belajar — dengan caranya, dalam ritmenya.
+              “Di dalam air, tubuh terasa ringan, gerak terasa aman, dan setiap sentuhan air menjadi stimulasi. Di sinilah si kecil belajar dengan caranya, dalam ritmenya.”
             </p>
           </div>
         </section>
@@ -227,14 +220,8 @@ export function HomePage() {
           <div className="px-5">
             <SectionTitle eyebrow="Suasana" title="Kolam yang asri & menenangkan" sub={`${site.location.name} — dikelilingi pepohonan, teduh, dan jauh dari bising kota.`} />
           </div>
-          <div className="no-scrollbar flex snap-x snap-mandatory gap-4 overflow-x-auto px-5 pb-4 md:mx-auto md:grid md:max-w-6xl md:grid-cols-3 md:overflow-visible">
-            {site.gallery.map((g, i) => (
-              <figure key={g.img} className={`relative w-[78vw] shrink-0 snap-center overflow-hidden md:w-auto ${blobs[i % 3]} shadow-[0_25px_60px_-25px_rgb(0_0_0/0.6)]`} data-reveal="zoom" data-delay={String((i % 3) * 0.08)}>
-                <Picture name={g.img as ImageName} alt={g.alt} sizes="(min-width: 768px) 33vw, 78vw" imgClassName="aspect-[4/3.4] w-full object-cover" />
-              </figure>
-            ))}
-          </div>
-          <p className="mt-3 px-5 text-center text-xs text-white/55">Wajah anak diburamkan untuk menjaga privasi.</p>
+          <Gallery />
+          <p className="mt-2 px-5 text-center text-xs text-white/55">Ketuk foto untuk memperbesar · Wajah anak diburamkan untuk menjaga privasi.</p>
         </section>
 
         {/* ============ PARTNER ============ */}

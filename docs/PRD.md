@@ -396,3 +396,11 @@ Semuanya bisa ditambahkan di versi berikutnya.
 | Logo | Belum ada file vektor. Simbol diambil dari JPG (latar dihapus, ada versi terang untuk latar gelap). Tulisan logo dibuat ulang dengan HTML sehingga ejaannya **CENTER** |
 | Logo partner | Diambil dari poster (AASM & Yayasan Anak Spesial Indonesia) |
 | Video | Tidak dipakai di v1 |
+
+### Revisi 1 (8 Oktober 2026)
+- Slogan hero: **"Magic of water, power of Neuroforge."** (animasi kilau, tetap terbaca dalam Mode Tenang).
+- Deskripsi hero & footer diganti (lihat `site.description`).
+- Yayasan Anak Spesial Indonesia hanya tampil di bagian bawah (bagian Kredibilitas & footer; di landing page di atas Lokasi). Naungan ditulis lengkap "Association Aquatic of Sport Medicine".
+- Kutipan empati memakai tanda kutip, tanpa tanda pisah.
+- Isi paket: "Termasuk tiket anak, dan gratis 1 tiket pengantar" menggantikan "Untuk usia 2–17 tahun".
+- Galeri: foto tampil utuh (masonry, tanpa zoom/potong) + bisa diperbesar; foto beresolusi rendah dari poster diganti foto asli.

@@ -9,26 +9,21 @@ export const images = {
       1080
     ]
   },
-  "foto-k2-bot": {
-    "w": 510,
-    "h": 410,
+  "kegiatan-terapi-1": {
+    "w": 768,
+    "h": 1024,
     "widths": [
       480,
-      510
+      768
     ]
   },
-  "foto-k2-mr": {
-    "w": 310,
-    "h": 500,
+  "kegiatan-terapi-2": {
+    "w": 1024,
+    "h": 865,
     "widths": [
-      310
-    ]
-  },
-  "foto-k2-tl": {
-    "w": 415,
-    "h": 265,
-    "widths": [
-      415
+      480,
+      800,
+      1024
     ]
   },
   "logo-aasm": {

@@ -480,7 +480,7 @@ function Brain({ count }: { count: number }) {
     camUp.crossVectors(right, fwd).normalize()
     const wide = size.width / size.height > 1.1
     const dist = wide ? 5.4 : 6.2
-    g.position.copy(camera.position).addScaledVector(fwd, dist).addScaledVector(right, wide ? 1.9 : 0).addScaledVector(camUp, wide ? 0 : 1.35 - (1 - state.brain) * 0.6)
+    g.position.copy(camera.position).addScaledVector(fwd, dist).addScaledVector(right, wide ? 1.9 : 0).addScaledVector(camUp, wide ? 0 : 1.5 - (1 - state.brain) * 0.6)
     g.quaternion.copy(camera.quaternion)
     g.rotateY(t * 0.18 + state.pointer.x * 0.35)
     g.rotateX(-0.15 + state.pointer.y * 0.2)
