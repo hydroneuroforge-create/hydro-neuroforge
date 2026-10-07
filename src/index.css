@@ -1,0 +1,68 @@
+@import 'tailwindcss';
+
+@theme {
+  --font-display: 'Baloo 2', system-ui, sans-serif;
+  --font-body: 'Nunito', system-ui, sans-serif;
+
+  --color-sky-cloud: #e8f6ff;
+  --color-sky-soft: #bae6fd;
+  --color-sky-brand: #38bdf8;
+  --color-sky-deep: #0ea5e9;
+  --color-sky-ocean: #0284c7;
+  --color-mint: #6ee7b7;
+  --color-sunny: #fde68a;
+}
+
+:root {
+  color-scheme: light;
+}
+
+html {
+  scroll-behavior: smooth;
+}
+
+body {
+  margin: 0;
+  font-family: var(--font-body);
+  color: #0f3b57;
+  background: #e8f6ff;
+  -webkit-font-smoothing: antialiased;
+  overflow-x: hidden;
+}
+
+h1, h2, h3, h4, .font-display {
+  font-family: var(--font-display);
+}
+
+/* Scrollbar lembut bernuansa air */
+::-webkit-scrollbar {
+  width: 10px;
+}
+::-webkit-scrollbar-track {
+  background: #e8f6ff;
+}
+::-webkit-scrollbar-thumb {
+  background: #7dd3fc;
+  border-radius: 999px;
+}
+::-webkit-scrollbar-thumb:hover {
+  background: #38bdf8;
+}
+
+@keyframes float-bob {
+  0%, 100% { transform: translateY(0); }
+  50% { transform: translateY(-12px); }
+}
+.animate-float-bob {
+  animation: float-bob 6s ease-in-out infinite;
+}
+
+@keyframes wave-shift {
+  0% { background-position-x: 0; }
+  100% { background-position-x: 1200px; }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  html { scroll-behavior: auto; }
+  .animate-float-bob { animation: none; }
+}
