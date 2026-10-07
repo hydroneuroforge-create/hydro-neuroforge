@@ -39,6 +39,7 @@ Jangan mengubah `scripts/`, `vite.config.ts`, `vercel.json`, atau `package.json`
 - Jangan memakai kata **"menyembuhkan"**. Gunakan "membantu", "mendukung", "menstimulasi".
 - Nama brand di web: **Hydro Neuroforge Center** (ejaan *Center*).
 - Bahasa: Indonesia, hangat, sapaan "Ayah/Bunda".
+- **Jangan memakai tanda pisah panjang (—)** di teks website; gunakan koma/titik. Tulis **"1 on 1"** (tanpa tanda hubung), bukan "1-on-1".
 - Konsultasi WhatsApp **gratis**; observasi tatap muka **berbayar** (sudah termasuk konsultasi langsung).
 
 ## 4. Alur kerja setiap perubahan

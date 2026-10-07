@@ -407,3 +407,7 @@ Semuanya bisa ditambahkan di versi berikutnya.
 
 ### Revisi 2
 - Galeri: foto suasana kolam cukup 1. Susunan masonry dibuat dengan flexbox (bukan CSS `columns`) karena di Safari iPhone ada foto yang tidak tampil.
+
+### Revisi 3
+- Semua tanda — dihapus dari teks website (judul tab & meta juga). "1-on-1" ditulis "1 on 1".
+- FAQ "Bagaimana alur untuk mulai?" memakai teks baru dari pemilik.

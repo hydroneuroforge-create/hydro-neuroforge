@@ -27,7 +27,7 @@ export function Header() {
   return (
     <header className={`fixed inset-x-0 top-0 z-50 transition-colors duration-300 ${solid || open ? 'bg-navy/85 shadow-lg backdrop-blur-md' : 'bg-gradient-to-b from-navy/60 to-transparent'}`}>
       <div className="mx-auto flex h-16 max-w-6xl items-center justify-between gap-3 px-4 md:h-[72px] md:px-5">
-        <a href="/" aria-label="Hydro Neuroforge Center — beranda">
+        <a href="/" aria-label="Hydro Neuroforge Center, beranda">
           <span className="md:hidden"><Logo tone="light" size="sm" /></span>
           <span className="hidden md:block"><Logo tone="light" /></span>
         </a>

@@ -47,7 +47,7 @@ export function PrivacyPage() {
 
           <h2>Kontak</h2>
           <p>
-            {site.name} — {site.location.name}, {site.location.city}. WhatsApp {site.contact.whatsappDisplay}, Instagram @{site.contact.instagram}.
+            {site.name}, {site.location.name}, {site.location.city}. WhatsApp {site.contact.whatsappDisplay}, Instagram @{site.contact.instagram}.
           </p>
         </article>
       </main>

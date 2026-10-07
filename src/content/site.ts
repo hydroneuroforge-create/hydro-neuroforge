@@ -69,7 +69,7 @@ export const site = {
   },
 
   program: {
-    name: 'Program Hydrotherapy 1-on-1',
+    name: 'Program Hydrotherapy 1 on 1',
     price: 'Rp1.000.000',
     period: '/ bulan',
     perSession: 'Setara Rp250 ribu per sesi',
@@ -128,7 +128,7 @@ export const site = {
     },
     {
       title: 'Sesi rutin dimulai',
-      text: 'Sesi privat 1-on-1 selama 60 menit, seminggu sekali, dengan perkembangan yang dipantau bersama orang tua.',
+      text: 'Sesi privat 1 on 1 selama 60 menit, seminggu sekali, dengan perkembangan yang dipantau bersama orang tua.',
     },
   ],
 
@@ -136,7 +136,7 @@ export const site = {
     title: 'Air yang menenangkan, otak yang bertumbuh',
     paragraphs: [
       'Program kami berlandaskan riset Center on the Developing Child, Harvard University tentang perkembangan otak anak: koneksi saraf terbentuk dan menguat lewat pengalaman yang berulang, hubungan yang hangat, dan lingkungan yang aman.',
-      'Air adalah ruang belajar yang unik. Daya apung, tekanan, dan suhunya memberi rangsangan sensorik yang kaya sekaligus menenangkan — sehingga anak lebih siap menerima stimulasi dan melatih kemampuan barunya, satu langkah kecil setiap minggu.',
+      'Air adalah ruang belajar yang unik. Daya apung, tekanan, dan suhunya memberi rangsangan sensorik yang kaya sekaligus menenangkan, sehingga anak lebih siap menerima stimulasi dan melatih kemampuan barunya, satu langkah kecil setiap minggu.',
     ],
     pillars: [
       { k: '1 : 1', v: 'Satu anak, satu terapis' },
@@ -229,15 +229,15 @@ export const site = {
   faq: [
     {
       q: 'Anak saya takut air, apakah tetap bisa ikut?',
-      a: 'Bisa. Banyak anak kami awalnya takut air. Terapis memulai dengan pengenalan bertahap — bermain di tepi, menyentuh air, lalu masuk perlahan — mengikuti kesiapan anak, tanpa paksaan.',
+      a: 'Bisa. Banyak anak kami awalnya takut air. Terapis memulai dengan pengenalan bertahap: bermain di tepi, menyentuh air, lalu masuk perlahan, mengikuti kesiapan anak tanpa paksaan.',
     },
     {
       q: 'Bagaimana alur untuk mulai?',
-      a: 'Hubungi kami via WhatsApp untuk konsultasi gratis. Setelah itu kita jadwalkan observasi tatap muka (berbayar) untuk mengenal anak dan menentukan materi. Sesi rutin dimulai setelah observasi.',
+      a: 'Hubungi kami via WhatsApp untuk konsultasi gratis. Setelah itu kita jadwalkan observasi untuk mengenal anak dan menentukan materi. Sesi rutin dimulai setelah observasi.',
     },
     {
       q: 'Berapa biayanya?',
-      a: 'Paket rutin Rp1.000.000 per bulan untuk 4 sesi privat 1-on-1 (seminggu sekali, 60 menit). Biaya observasi awal akan kami informasikan via WhatsApp.',
+      a: 'Paket rutin Rp1.000.000 per bulan untuk 4 sesi privat 1 on 1 (seminggu sekali, 60 menit). Biaya observasi awal akan kami informasikan via WhatsApp.',
     },
     {
       q: 'Usia berapa yang bisa ikut?',
@@ -245,7 +245,7 @@ export const site = {
     },
     {
       q: 'Apakah aman? Bagaimana pengawasannya?',
-      a: 'Setiap sesi bersifat 1-on-1 — satu terapis fokus mendampingi satu anak sepanjang sesi, dengan alat bantu apung sesuai kebutuhan.',
+      a: 'Setiap sesi bersifat 1 on 1. Satu terapis fokus mendampingi satu anak sepanjang sesi, dengan alat bantu apung sesuai kebutuhan.',
     },
     {
       q: 'Apakah bisa dikombinasikan dengan terapi lain?',
@@ -257,7 +257,7 @@ export const site = {
     },
     {
       q: 'Kapan perkembangan mulai terlihat?',
-      a: 'Setiap anak berbeda. Banyak orang tua melihat perubahan kecil — lebih tenang, lebih kooperatif — dalam beberapa minggu. Konsistensi sesi mingguan adalah kuncinya.',
+      a: 'Setiap anak berbeda. Banyak orang tua melihat perubahan kecil, seperti lebih tenang dan lebih kooperatif, dalam beberapa minggu. Konsistensi sesi mingguan adalah kuncinya.',
     },
   ],
 

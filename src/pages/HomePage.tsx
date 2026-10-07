@@ -218,7 +218,7 @@ export function HomePage() {
         {/* ============ GALERI ============ */}
         <section data-depth="-15" data-pitch="16" data-brain="0" className="py-20">
           <div className="px-5">
-            <SectionTitle eyebrow="Suasana" title="Kolam yang asri & menenangkan" sub={`${site.location.name} — dikelilingi pepohonan, teduh, dan jauh dari bising kota.`} />
+            <SectionTitle eyebrow="Suasana" title="Kolam yang asri & menenangkan" sub={`${site.location.name}, dikelilingi pepohonan, teduh, dan jauh dari bising kota.`} />
           </div>
           <Gallery />
           <p className="mt-2 px-5 text-center text-xs text-white/55">Ketuk foto untuk memperbesar · Wajah anak diburamkan untuk menjaga privasi.</p>
@@ -245,7 +245,7 @@ export function HomePage() {
               <span className="eyebrow bg-navy/60 text-wa ring-1 ring-wa/30">Daftar sekarang</span>
               <h2 className="mt-4 text-[34px] leading-[1.08] font-semibold sm:text-5xl">Ceritakan tentang si kecil</h2>
               <p className="mt-4 text-[16.5px] leading-relaxed text-white/75">
-                Isi formulir singkat ini — WhatsApp akan terbuka dengan pesan yang sudah tersusun rapi. Tim kami akan membalas untuk konsultasi gratis & menjadwalkan observasi.
+                Isi formulir singkat ini, lalu WhatsApp akan terbuka dengan pesan yang sudah tersusun rapi. Tim kami akan membalas untuk konsultasi gratis & menjadwalkan observasi.
               </p>
               <ul className="mt-6 grid gap-2 text-sm text-white/80">
                 <li className="flex items-center gap-2"><Check className="size-4 text-wa" aria-hidden="true" /> Gratis konsultasi via WhatsApp</li>

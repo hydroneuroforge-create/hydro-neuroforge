@@ -63,7 +63,7 @@ export function LandingPage() {
                 Anak Lebih <span className="text-sun">Tenang</span>, Fokus & Percaya Diri Lewat Terapi Air
               </h1>
               <p className="mt-4 animate-[fade-up_.9s_.35s_both] text-[17px] leading-relaxed text-white/90">
-                Hydrotherapy 1-on-1 untuk anak berkebutuhan khusus usia 2–17 tahun di Sportclub Danau Bogor Raya.
+                Hydrotherapy 1 on 1 untuk anak berkebutuhan khusus usia 2–17 tahun di Sportclub Danau Bogor Raya.
               </p>
               <WaLink place="lp-hero" className="btn-wa mt-6 w-full animate-[fade-up_.9s_.5s_both] text-[16.5px] sm:w-auto">
                 <WaIcon /> Konsultasi Gratis via WhatsApp
@@ -82,7 +82,7 @@ export function LandingPage() {
 
         {/* ============ MANFAAT ============ */}
         <section className="px-5 py-12">
-          <Title eyebrow="Manfaat" sub="Hydrotherapy for Special Needs — berlandaskan riset Center on the Developing Child, Harvard University.">
+          <Title eyebrow="Manfaat" sub="Hydrotherapy for Special Needs, berlandaskan riset Center on the Developing Child, Harvard University.">
             Apa yang dilatih di dalam air?
           </Title>
           <div className="mx-auto grid max-w-5xl grid-cols-2 gap-3 sm:gap-5 lg:grid-cols-4">
