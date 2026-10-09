@@ -1,98 +1,82 @@
-import { motion } from 'framer-motion'
-import { MapPin, Navigation, Clock } from 'lucide-react'
-import Section from './Section'
-import InstagramIcon from './icons/InstagramIcon'
-import {
-  LOCATION_NAME,
-  LOCATION_FULL,
-  MAPS_EMBED_URL,
-  MAPS_LINK,
-  INSTAGRAM_URL,
-  INSTAGRAM_HANDLE,
-} from '../config'
+import { useEffect, useRef, useState } from 'react'
+import { Clock, MapPin, Navigation } from 'lucide-react'
+import { site } from '../content/site'
+import { track } from '../lib/analytics'
+import { IgIcon, WaIcon, WaLink } from './WaLink'
 
-export default function Location() {
+/** Lokasi + jam + peta (peta baru dimuat ketika mendekati layar). */
+export function Location({ tone = 'dark' }: { tone?: 'dark' | 'light' }) {
+  const ref = useRef<HTMLDivElement>(null)
+  const [loadMap, setLoadMap] = useState(false)
+  useEffect(() => {
+    const el = ref.current
+    if (!el) return
+    const io = new IntersectionObserver(([e]) => e.isIntersecting && (setLoadMap(true), io.disconnect()), { rootMargin: '300px' })
+    io.observe(el)
+    return () => io.disconnect()
+  }, [])
+
+  const card = tone === 'dark' ? 'glass' : 'bg-white shadow-[0_20px_60px_-25px_rgb(15_32_40/0.3)]'
+  const sub = tone === 'dark' ? 'text-white/75' : 'text-slate'
   return (
-    <Section
-      id="lokasi"
-      eyebrow="Lokasi"
-      title="Kunjungi Kami"
-      subtitle={`Kami berlokasi di ${LOCATION_NAME}. Kami tunggu kedatangan Anda dan ananda.`}
-      className="bg-white"
-    >
-      <div className="grid grid-cols-1 gap-8 lg:grid-cols-2">
-        <motion.div
-          className="overflow-hidden rounded-3xl shadow-lg ring-1 ring-sky-100"
-          initial={{ opacity: 0, x: -30 }}
-          whileInView={{ opacity: 1, x: 0 }}
-          viewport={{ once: true, margin: '-60px' }}
-          transition={{ duration: 0.6 }}
+    <div className="grid items-stretch gap-5 md:grid-cols-[1fr_1.3fr]">
+      <div className={`rounded-[28px] p-6 sm:p-8 ${card}`} data-reveal="left">
+        <ul className="grid gap-5">
+          <li className="flex gap-4">
+            <span className="flex size-11 shrink-0 items-center justify-center rounded-2xl bg-aqua/15 text-aqua"><MapPin aria-hidden="true" /></span>
+            <span>
+              <span className="block font-bold">{site.location.name}</span>
+              <span className={`text-sm ${sub}`}>{site.location.city}</span>
+            </span>
+          </li>
+          <li className="flex gap-4">
+            <span className="flex size-11 shrink-0 items-center justify-center rounded-2xl bg-sun/15 text-sun"><Clock aria-hidden="true" /></span>
+            <span>
+              <span className="block font-bold">{site.hours.days}</span>
+              <span className={`text-sm ${sub}`}>{site.hours.time}</span>
+            </span>
+          </li>
+          <li className="flex gap-4">
+            <span className="flex size-11 shrink-0 items-center justify-center rounded-2xl bg-wa/15 text-wa"><WaIcon className="size-6" /></span>
+            <span>
+              <span className="block font-bold">WhatsApp</span>
+              <WaLink place="lokasi-nomor" className={`text-sm underline-offset-2 hover:underline ${sub}`}>{site.contact.whatsappDisplay}</WaLink>
+            </span>
+          </li>
+          <li className="flex gap-4">
+            <span className="flex size-11 shrink-0 items-center justify-center rounded-2xl bg-pink-400/15 text-pink-400"><IgIcon className="size-6" /></span>
+            <span>
+              <span className="block font-bold">Instagram</span>
+              <a href={site.contact.instagramUrl} target="_blank" rel="noopener" onClick={() => track('klik_instagram', { place: 'lokasi' })} className={`text-sm underline-offset-2 hover:underline ${sub}`}>
+                @{site.contact.instagram}
+              </a>
+            </span>
+          </li>
+        </ul>
+        <a
+          href={site.location.mapsUrl}
+          target="_blank"
+          rel="noopener"
+          onClick={() => track('klik_petunjuk_arah', { page: location.pathname })}
+          className={`btn mt-7 w-full ${tone === 'dark' ? 'bg-white text-navy' : 'bg-navy text-white'}`}
         >
+          <Navigation className="size-5" aria-hidden="true" /> Petunjuk Arah
+        </a>
+      </div>
+      <div ref={ref} className="relative min-h-72 overflow-hidden rounded-[28px] bg-deep/40" data-reveal="right">
+        {loadMap ? (
           <iframe
-            title="Peta Lokasi Hydro Neuroforge Center"
-            src={MAPS_EMBED_URL}
-            className="h-80 w-full border-0 lg:h-full"
+            title={`Peta lokasi ${site.location.name}`}
+            src={site.location.mapsEmbed}
+            className="absolute inset-0 size-full border-0"
             loading="lazy"
             referrerPolicy="no-referrer-when-downgrade"
             allowFullScreen
           />
-        </motion.div>
-
-        <motion.div
-          className="flex flex-col justify-center space-y-5"
-          initial={{ opacity: 0, x: 30 }}
-          whileInView={{ opacity: 1, x: 0 }}
-          viewport={{ once: true, margin: '-60px' }}
-          transition={{ duration: 0.6 }}
-        >
-          <div className="flex gap-4 rounded-2xl bg-sky-cloud p-5">
-            <span className="flex h-12 w-12 shrink-0 items-center justify-center rounded-xl bg-gradient-to-br from-sky-brand to-sky-ocean text-white">
-              <MapPin className="h-6 w-6" />
-            </span>
-            <div>
-              <h3 className="font-display text-lg font-bold text-[#0f3b57]">
-                Alamat
-              </h3>
-              <p className="mt-1 text-[#3b6b8a]">{LOCATION_FULL}</p>
-            </div>
-          </div>
-
-          <div className="flex gap-4 rounded-2xl bg-sky-cloud p-5">
-            <span className="flex h-12 w-12 shrink-0 items-center justify-center rounded-xl bg-gradient-to-br from-mint to-sky-brand text-white">
-              <Clock className="h-6 w-6" />
-            </span>
-            <div>
-              <h3 className="font-display text-lg font-bold text-[#0f3b57]">
-                Jam Operasional
-              </h3>
-              <p className="mt-1 text-[#3b6b8a]">
-                Berdasarkan janji temu. Hubungi kami untuk penjadwalan sesi.
-              </p>
-            </div>
-          </div>
-
-          <div className="flex flex-wrap gap-3 pt-2">
-            <a
-              href={MAPS_LINK}
-              target="_blank"
-              rel="noopener noreferrer"
-              className="inline-flex items-center gap-2 rounded-full bg-gradient-to-r from-sky-brand to-sky-ocean px-6 py-3 font-bold text-white shadow-md transition-transform hover:scale-105"
-            >
-              <Navigation className="h-5 w-5" />
-              Buka di Google Maps
-            </a>
-            <a
-              href={INSTAGRAM_URL}
-              target="_blank"
-              rel="noopener noreferrer"
-              className="inline-flex items-center gap-2 rounded-full border-2 border-sky-brand/40 px-6 py-3 font-bold text-sky-ocean transition-colors hover:bg-sky-50"
-            >
-              <InstagramIcon className="h-5 w-5" />
-              @{INSTAGRAM_HANDLE}
-            </a>
-          </div>
-        </motion.div>
+        ) : (
+          <div className="absolute inset-0 flex items-center justify-center text-sm text-white/60">Memuat peta…</div>
+        )}
       </div>
-    </Section>
+    </div>
   )
 }

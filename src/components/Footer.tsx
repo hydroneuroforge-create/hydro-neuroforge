@@ -1,91 +1,49 @@
-import { Droplets, MessageCircle, MapPin } from 'lucide-react'
-import InstagramIcon from './icons/InstagramIcon'
-import {
-  BRAND,
-  INSTAGRAM_URL,
-  INSTAGRAM_HANDLE,
-  buildWhatsAppLink,
-  MAPS_LINK,
-  LOCATION_NAME,
-} from '../config'
+import { site } from '../content/site'
+import { CalmToggle } from './CalmToggle'
+import { Logo } from './Logo'
+import { IgIcon, WaIcon, WaLink } from './WaLink'
 
-export default function Footer() {
-  const year = new Date().getFullYear()
+export function Footer({ showCalm = true }: { showCalm?: boolean }) {
   return (
-    <footer className="bg-[#0f3b57] text-white">
-      <div className="mx-auto grid max-w-6xl grid-cols-1 gap-8 px-5 py-14 sm:px-8 md:grid-cols-3">
+    <footer className="relative z-10 border-t border-white/10 bg-navy pb-28 text-white md:pb-12">
+      <div className="mx-auto grid max-w-6xl gap-8 px-5 pt-12 md:grid-cols-[1.4fr_1fr_1fr]">
         <div>
-          <div className="flex items-center gap-2">
-            <span className="flex h-10 w-10 items-center justify-center rounded-xl bg-gradient-to-br from-sky-brand to-sky-ocean">
-              <Droplets className="h-5 w-5" />
-            </span>
-            <span className="font-display text-lg font-bold">{BRAND.name}</span>
-          </div>
-          <p className="mt-4 max-w-xs text-sm leading-relaxed text-sky-100/70">
-            Layanan hidroterapi &amp; fun swimming untuk anak berkebutuhan
-            khusus. {BRAND.tagline}.
+          <Logo tone="light" />
+          <p className="mt-4 max-w-sm text-sm leading-relaxed text-white/65">
+            {site.description}
           </p>
         </div>
-
-        <div>
-          <h4 className="font-display text-base font-bold">Navigasi</h4>
-          <ul className="mt-4 space-y-2 text-sm text-sky-100/70">
-            {[
-              ['Tentang', '#tentang'],
-              ['Layanan', '#layanan'],
-              ['Manfaat', '#manfaat'],
-              ['Galeri', '#galeri'],
-              ['FAQ', '#faq'],
-              ['Lokasi', '#lokasi'],
-            ].map(([label, href]) => (
-              <li key={href}>
-                <a href={href} className="transition-colors hover:text-sky-brand">
-                  {label}
-                </a>
-              </li>
-            ))}
+        <div className="text-sm">
+          <p className="mb-3 font-bold">Kontak</p>
+          <ul className="grid gap-2 text-white/70">
+            <li>
+              <WaLink place="footer" className="inline-flex items-center gap-2 hover:text-white">
+                <WaIcon className="size-4" /> {site.contact.whatsappDisplay}
+              </WaLink>
+            </li>
+            <li>
+              <a href={site.contact.instagramUrl} target="_blank" rel="noopener" className="inline-flex items-center gap-2 hover:text-white">
+                <IgIcon className="size-4" /> @{site.contact.instagram}
+              </a>
+            </li>
+            <li>{site.hours.days}, {site.hours.time}</li>
           </ul>
         </div>
-
-        <div>
-          <h4 className="font-display text-base font-bold">Hubungi Kami</h4>
-          <ul className="mt-4 space-y-3 text-sm text-sky-100/70">
-            <li>
-              <a
-                href={buildWhatsAppLink()}
-                target="_blank"
-                rel="noopener noreferrer"
-                className="flex items-center gap-2 transition-colors hover:text-sky-brand"
-              >
-                <MessageCircle className="h-4 w-4" /> WhatsApp
-              </a>
-            </li>
-            <li>
-              <a
-                href={INSTAGRAM_URL}
-                target="_blank"
-                rel="noopener noreferrer"
-                className="flex items-center gap-2 transition-colors hover:text-sky-brand"
-              >
-                <InstagramIcon className="h-4 w-4" /> @{INSTAGRAM_HANDLE}
-              </a>
-            </li>
-            <li>
-              <a
-                href={MAPS_LINK}
-                target="_blank"
-                rel="noopener noreferrer"
-                className="flex items-center gap-2 transition-colors hover:text-sky-brand"
-              >
-                <MapPin className="h-4 w-4" /> {LOCATION_NAME}
-              </a>
-            </li>
+        <div className="text-sm">
+          <p className="mb-3 font-bold">Naungan & Partner</p>
+          <ul className="grid gap-2 text-white/70">
+            <li>Association Aquatic of Sport Medicine</li>
+            <li>Yayasan Anak Spesial Indonesia</li>
           </ul>
+          {showCalm && <CalmToggle className="mt-5" />}
         </div>
       </div>
-
-      <div className="border-t border-white/10 py-5 text-center text-xs text-sky-100/50">
-        © {year} {BRAND.name}. Didirikan oleh {BRAND.founder}. Dibuat dengan 💙.
+      <div className="mx-auto mt-10 max-w-6xl px-5">
+        <p className="rounded-2xl border border-white/10 bg-white/5 p-4 text-xs leading-relaxed text-white/60">{site.disclaimer}</p>
+        <div className="mt-6 flex flex-wrap items-center justify-between gap-3 text-xs text-white/50">
+          <span>© {new Date().getFullYear()} {site.name}</span>
+          <a href="/kebijakan-privasi" className="hover:text-white">Kebijakan Privasi</a>
+        </div>
       </div>
     </footer>
   )
