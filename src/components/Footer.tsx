@@ -41,7 +41,7 @@ export function Footer({ showCalm = true }: { showCalm?: boolean }) {
       <div className="mx-auto mt-10 max-w-6xl px-5">
         <p className="rounded-2xl border border-white/10 bg-white/5 p-4 text-xs leading-relaxed text-white/60">{site.disclaimer}</p>
         <div className="mt-6 flex flex-wrap items-center justify-between gap-3 text-xs text-white/50">
-          <span>© {new Date().getFullYear()} {site.name}</span>
+          <span>© {new Date().getFullYear()} {site.name}. Dikelola oleh {site.legalEntity}.</span>
           <a href="/kebijakan-privasi" className="hover:text-white">Kebijakan Privasi</a>
         </div>
       </div>

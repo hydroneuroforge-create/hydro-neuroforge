@@ -20,6 +20,7 @@ export const site = {
   url: 'https://hydroneuroforge.io',
   tagline: 'Hydrotherapy for Special Needs',
   slogan: 'Magic of water, power of Neuroforge.',
+  legalEntity: 'PT RAHID AMERTA DERANA',
   /** Deskripsi utama (hero beranda & footer) */
   description:
     'Terapi air yang membantu stimulasi sistem saraf pusat otak, meregulasi emosi, dan membantu perkembangan sensorik & motorik anak berkebutuhan khusus di Sport Club Danau Bogor Raya.',
