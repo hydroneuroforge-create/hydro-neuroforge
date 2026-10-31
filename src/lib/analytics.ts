@@ -63,22 +63,60 @@ export function initAnalytics() {
  * Catat event. Nama event (PRD §13):
  * klik_whatsapp, kirim_formulir, klik_petunjuk_arah, klik_instagram, scroll_75
  *
- * Meta: setiap event yang nanti juga dikirim lewat CAPI membawa `eventID`
- * supaya Meta bisa membuang duplikatnya (deduplication).
+ * Setiap event dikirim DUA jalur: Pixel (browser) dan CAPI (/api/capi) dengan
+ * `event_id` yang sama, sehingga Meta membuang duplikatnya (deduplication).
+ * Kalau CAPI tidak dikonfigurasi, pengiriman itu gagal diam-diam — Pixel tetap
+ * jalan, jadi tidak ada event yang hilang karena satu jalur mati.
  */
 export function track(event: string, params: Params = {}) {
   if (typeof window === 'undefined') return
   window.gtag?.('event', event, params)
-  if (window.fbq) {
-    const eventID = `${event}-${Date.now()}-${Math.random().toString(36).slice(2, 8)}`
-    const opts = { eventID }
-    if (event === 'kirim_formulir') window.fbq('track', 'Lead', params, opts)
-    else if (event === 'klik_whatsapp') window.fbq('track', 'Contact', params, opts)
-    else window.fbq('trackCustom', event, params, opts)
-    ;(window as unknown as { __hncEvents?: unknown[] }).__hncEvents ??= []
-    ;(window as unknown as { __hncEvents: unknown[] }).__hncEvents.push({ event, params, eventID, ts: Date.now() })
+  const eventID = `${event}-${Date.now()}-${Math.random().toString(36).slice(2, 10)}`
+
+  let mapped = event
+  let custom = true
+  if (event === 'kirim_formulir') {
+    mapped = 'Lead'
+    custom = false
+  } else if (event === 'klik_whatsapp') {
+    mapped = 'Contact'
+    custom = false
   }
-  if (import.meta.env.DEV) console.info('[track]', event, params)
+
+  if (window.fbq) {
+    if (custom) window.fbq('trackCustom', mapped, params, { eventID })
+    else window.fbq('track', mapped, params, { eventID })
+    ;(window as unknown as { __hncEvents?: unknown[] }).__hncEvents ??= []
+    ;(window as unknown as { __hncEvents: unknown[] }).__hncEvents.push({ event: mapped, params, eventID, ts: Date.now() })
+  }
+
+  void sendCapi(mapped, eventID, params)
+  if (import.meta.env.DEV) console.info('[track]', mapped, params)
+}
+
+/** Kirim event yang sama lewat server (CAPI). Kegagalan tidak pernah melempar. */
+async function sendCapi(eventName: string, eventID: string, params: Params) {
+  try {
+    const cookie = (n: string) =>
+      document.cookie.split('; ').find((c) => c.startsWith(`${n}=`))?.split('=')[1]
+    const body = {
+      event_name: eventName,
+      event_id: eventID,
+      event_time: Math.floor(Date.now() / 1000),
+      event_source_url: location.href,
+      action_source: 'website',
+      user_data: { fbp: cookie('_fbp'), fbc: cookie('_fbc') },
+      custom_data: { ...params, page: location.pathname },
+    }
+    await fetch('/api/capi', {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify(body),
+      keepalive: true,
+    })
+  } catch {
+    /* CAPI opsional: Pixel sudah mengirim event yang sama */
+  }
 }
 
 let viewContentFired = false
