@@ -129,7 +129,7 @@ export function LandingPage() {
         </section>
 
         {/* ============ HARGA ============ */}
-        <section className="px-5 py-14">
+        <section className="px-5 py-14" data-view-content>
           <Title eyebrow="Biaya">Transparan, tanpa biaya tersembunyi</Title>
           <div className="mx-auto max-w-md overflow-hidden rounded-[32px] bg-navy text-white shadow-[0_40px_80px_-30px_rgb(15_32_40/0.6)]" data-reveal="zoom">
             <div className="relative p-7">

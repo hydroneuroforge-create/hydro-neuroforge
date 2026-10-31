@@ -1,7 +1,7 @@
 import '../styles/index.css'
 import { StrictMode, type ComponentType } from 'react'
 import { createRoot, hydrateRoot } from 'react-dom/client'
-import { initAnalytics, trackScrollDepth } from '../lib/analytics'
+import { initAnalytics, observeViewContent, trackScrollDepth } from '../lib/analytics'
 import { captureRef } from '../lib/wa'
 
 /** Menyalakan halaman di browser (hydrate HTML hasil prerender). */
@@ -18,4 +18,5 @@ export function boot(Page: ComponentType) {
   window.__hncReady = true
   initAnalytics()
   trackScrollDepth()
+  observeViewContent()
 }

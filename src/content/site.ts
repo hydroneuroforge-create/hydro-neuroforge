@@ -55,7 +55,8 @@ export const site = {
   /** Isi ID agar analitik aktif. Kosongkan ('') bila belum ada. */
   analytics: {
     ga4Id: '',
-    metaPixelId: '',
+    /** Pixel "Hydro Neuroforge - Situs", dibuat di BM 382691607116882 (31 Okt 2026) */
+    metaPixelId: '2615749505536963',
   },
 
   /** Pesan otomatis saat orang tua menekan tombol WhatsApp biasa */

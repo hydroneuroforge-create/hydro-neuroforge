@@ -62,16 +62,54 @@ export function initAnalytics() {
 /**
  * Catat event. Nama event (PRD §13):
  * klik_whatsapp, kirim_formulir, klik_petunjuk_arah, klik_instagram, scroll_75
+ *
+ * Meta: setiap event yang nanti juga dikirim lewat CAPI membawa `eventID`
+ * supaya Meta bisa membuang duplikatnya (deduplication).
  */
 export function track(event: string, params: Params = {}) {
   if (typeof window === 'undefined') return
   window.gtag?.('event', event, params)
   if (window.fbq) {
-    if (event === 'kirim_formulir') window.fbq('track', 'Lead', params)
-    else if (event === 'klik_whatsapp') window.fbq('track', 'Contact', params)
-    else window.fbq('trackCustom', event, params)
+    const eventID = `${event}-${Date.now()}-${Math.random().toString(36).slice(2, 8)}`
+    const opts = { eventID }
+    if (event === 'kirim_formulir') window.fbq('track', 'Lead', params, opts)
+    else if (event === 'klik_whatsapp') window.fbq('track', 'Contact', params, opts)
+    else window.fbq('trackCustom', event, params, opts)
+    ;(window as unknown as { __hncEvents?: unknown[] }).__hncEvents ??= []
+    ;(window as unknown as { __hncEvents: unknown[] }).__hncEvents.push({ event, params, eventID, ts: Date.now() })
   }
   if (import.meta.env.DEV) console.info('[track]', event, params)
+}
+
+let viewContentFired = false
+
+/** ViewContent: sekali saja, saat blok penawaran masuk ~50% viewport. */
+export function observeViewContent(selector = '[data-view-content]') {
+  if (typeof window === 'undefined' || viewContentFired) return
+  const el = document.querySelector(selector)
+  if (!el) return
+  if (!('IntersectionObserver' in window)) {
+    track('ViewContent', { content_name: site.program.name })
+    viewContentFired = true
+    return
+  }
+  const io = new IntersectionObserver(
+    (entries) => {
+      for (const e of entries) {
+        if (e.isIntersecting && !viewContentFired) {
+          viewContentFired = true
+          track('ViewContent', {
+            content_name: site.program.name,
+            content_category: 'hydrotherapy',
+            page: location.pathname,
+          })
+          io.disconnect()
+        }
+      }
+    },
+    { threshold: 0.5 },
+  )
+  io.observe(el)
 }
 
 /** Catat sekali ketika pengunjung men-scroll 75% halaman. */
